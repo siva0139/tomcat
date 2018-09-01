@@ -1,0 +1,11 @@
+- name: install java8 on debian
+  apt:
+    name: openjdk-8-jdk
+    state: present
+  when: ansible_os_family == "Debian"
+- name: install java8 on redhat
+  yum:
+    name: java-1.8.0-openjdk-devel
+    state: present
+  when: ansible_os_family == "RedHat"
+
