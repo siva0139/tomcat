@@ -7,5 +7,6 @@
   yum:
     name: java-1.8.0-openjdk-devel
     state: present
+    lock_timeout: 180
   when: ansible_os_family == "RedHat"
 

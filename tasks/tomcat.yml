@@ -2,44 +2,44 @@
   file:
     path: /usr/local/tomcat
     state: directory
-    owner: ansible
-    group: ansible
+    owner: appserver
+    group: appserver
     mode: 0755
     recurse: yes
 - name: download tomcat
   get_url:
     url: http://archive.apache.org/dist/tomcat/tomcat-8/v8.5.8/bin/apache-tomcat-8.5.8.tar.gz
     dest: /usr/local/tomcat/apache-tomcat-8.5.8.tar.gz
-    owner: ansible
-    group: ansible
+    owner: appserver
+    group: appserver
     mode: 0755
 - name: Extract apache-tomcat-8.5.8.tar.gz into /usr/local/tomcat/apache-tomcat-8.5.8
   unarchive:
     src: /usr/local/tomcat/apache-tomcat-8.5.8.tar.gz
     dest: /usr/local/tomcat
-    owner: ansible
-    group: ansible
+    owner: appserver
+    group: appserver
     remote_src: yes
 - name: create a file 
   file:
     path: /etc/init.d/tomcat8
     state: touch
-    owner: ansible
-    group: ansible
+    owner: appserver
+    group: appserver
     mode: 755
 - name: tomcat service file
   template: 
     src: tomcat8.j2
     dest: /etc/init.d/tomcat8
-    owner: ansible
-    group: ansible
+    owner: appserver
+    group: appserver
 - name: start the tomcat server
   command: nohup /etc/init.d/tomcat8 start
 - name: download jenkins.war file
-  get_url:
-    url: http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+  copy: 
+    src: mvn-hello-world.war 
     dest: /usr/local/tomcat/apache-tomcat-8.5.8/webapps
-    owner: ansible
-    group: ansible     
+    owner: appserver
+    group: appserver   
     mode: 755
 

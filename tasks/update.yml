@@ -7,4 +7,5 @@
     name: '*'
     update_cache: yes
     state: latest
+    lock_timeout: 180
   when: ansible_os_family == "RedHat"
